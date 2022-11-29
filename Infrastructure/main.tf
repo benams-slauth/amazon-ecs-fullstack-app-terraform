@@ -297,6 +297,22 @@ module "sns" {
   sns_name = "sns-${var.environment_name}"
 }
 
+module "sqs" {
+  source  = "clouddrove/sqs/aws"
+  version = "1.0.2"
+  name = "sqs-test"
+}
+
+# ------- Creating a SQS queue -------
+# resource "aws_sqs_queue" "terraform_queue" {
+#   name                      = "queue-${var.environment_name}"
+#   delay_seconds             = 90
+#   max_message_size          = 2048
+#   message_retention_seconds = 86400
+#   receive_wait_time_seconds = 10  
+# }
+
+
 # ------- Creating the server CodeBuild project -------
 module "codebuild_server" {
   source                 = "./Modules/CodeBuild"
